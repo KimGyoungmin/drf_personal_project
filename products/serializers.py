@@ -1,14 +1,26 @@
 from rest_framework import serializers
-from .models import Products
+from .models import Products, Category
 
 
+    
 class ProductsSerializers(serializers.ModelSerializer):
+    category = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=Category.objects.all(),
+        required=False
+    )
+    
     class Meta:
         model = Products
         fields = ['seller', 'title',
-                  'content', 'product_img']
+                  'content', 'product_img', 'category',]
         read_only_fields = ("seller",)
 
+    def validate_category(self, value):
+        if value and not Category.objects.filter(name=value).exists():
+            raise serializers.ValidationError("카테고리가 존재하지 않습니다.")
+        return value
+    
 
     def validate(self, attrs):
         if attrs['product_img'] is None:
