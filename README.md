@@ -76,7 +76,7 @@
    - 변수에 default img이름을 넣고 저장된 변수를 img_field의 default 속성에 넣음
    - 문제가 해결이 안되는것을 인지하고 Model을 다시 구성하기로 하고 데이터베이스 삭제 및 migration진행
    - 그럼에도 불구하고 계속해서 imagefield에 값이 안들어가는 상황이 발생
-   - serializer하면서 validate를 하는과정에서 img_field값이 None or Null 일때 default값을 넣는 코드를 작성
+   - serializer하면서 validate를 하는과정에서 img_field값이 None 일때 default값을 넣는 코드를 작성
    - 결과적으로는 imagefield에 값을 안넣을때 자동적으로 default값이 들어가는것을 확인 후 해결
 
 2. API accounts/logout의 Method 방식 매칭 에러
