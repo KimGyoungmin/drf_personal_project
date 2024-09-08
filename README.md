@@ -3,8 +3,8 @@
 - IDE : VsCode
 - Python version : 3.11
 - DataBase : Sqlite3
-- Framework : Django REST Framework
-- PIP : [pillow, simple-jwt, Django-extensions, ipython]
+- Framework : Django
+- PIP : [pillow, simple-jwt, Django-extensions, ipython,djagorestframework]
 
 
 ## **기능 구현**
