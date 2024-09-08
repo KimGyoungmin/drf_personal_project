@@ -7,7 +7,12 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+    
+class HashTag(models.Model):
+    tags = models.CharField(max_length=100, unique=True)
+    
+    def __str__(self):
+        return self.tags
 
 class Products(models.Model):
     seller = models.ForeignKey(
@@ -22,6 +27,7 @@ class Products(models.Model):
         to=Category, on_delete=models.SET_NULL, null=True, related_name="products")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    hashtag = models.ManyToManyField(to = HashTag, related_name="hash_product")
 
     def __str__(self):
         return f"판매자: {self.seller} 상품제목: {self.title}"

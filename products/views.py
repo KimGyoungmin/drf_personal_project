@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from .serializers import ProductsSerializers
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Products
+from .models import Products, HashTag
 from .pagination import CustomPageNumberPagination
 from django.db.models import Q
 
@@ -22,7 +22,13 @@ class ProductsListView(APIView):
     def post(self, request):
         serializer = ProductsSerializers(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(seller=request.user)
+            product = serializer.save(seller=request.user)
+            hashtags = request.data.get('hashtag')
+            hashtags = [hashtag.strip() for hashtag in hashtags.split(',')]
+            for hashtag in hashtags:
+                hashtag, created = HashTag.objects.get_or_create(tags=hashtag)
+                product.hashtag.add(hashtag.pk)
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # - **조건**: 로그인 상태 불필요.

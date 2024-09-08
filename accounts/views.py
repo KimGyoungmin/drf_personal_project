@@ -30,6 +30,7 @@ class UserRegisterationView(APIView):
 
     def post(self, request):
         serializer = UserRegisterSerializer(data=request.data)
+
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             refresh = RefreshToken.for_user(user)
@@ -134,4 +135,3 @@ class UserChangePasswordView(APIView):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response({"message": "비밀번호 변경 완료"})
-

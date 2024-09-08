@@ -3,7 +3,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .models import CustomUser
-from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.exceptions import AuthenticationFailed, ValidationError
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -22,6 +22,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             'birthday': {'required': True},
         }
     # 추가 유효성 검사 로직
+
     def validate(self, valid_user):
         # 비밀번호 일치 확인
         if valid_user['password'] != valid_user['password2']:
@@ -44,8 +45,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         )
         # 비밀번호는 해시화 해서 저장
         user.set_password(validated_data['password'])
-        
-
+        user.save()
         return user
 
 
@@ -81,6 +81,8 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 
 # 로그인 실패시 응답 변경
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    
+    
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
