@@ -174,7 +174,7 @@
    - method 관련 오류라 def post로 받았는지 그리고 POSTMAN에서의 메소드 방식을 정확하게 POST로 했는지 확인
    - POSTMAN의 헤더부분을 확인해본 결과 POSTMAN은 GET으로 인식하고있었음
    - 코드를 계속해서 확인했지만 method관련 문제는 없어보였음
-   - accounts/urls.py에서 url들을 보던중 문제 인식
+   - accounts/urls.py에서 url들을 보던중 문제 원인 파악
    - 이전의 만들었던 'accounts/<str:username>/'path를 가진 프로필 리소스 확인
    - 'accounts/logout/' path로 이름지었던 로그아웃을 프로필 리소스로 인식하여 method POST not allow로 빠지는거였음
    - 프로필 리소스의 path를 'accounts/profile/<str:username>/'으로 변경
