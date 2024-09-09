@@ -1,3 +1,6 @@
+## **프로젝트 주제**
+- 기본적인 회원기능과 상품기능을 가지고 있는 마켓을 DjangoRestFramework를 사용하여 구현한 프로젝트
+
 ## **개발환경**
 - OS : Window
 - IDE : VsCode
