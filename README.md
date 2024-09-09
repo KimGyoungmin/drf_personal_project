@@ -156,7 +156,7 @@
 
          
 ## **ERD 작성**
-![image](https://github.com/user-attachments/assets/751c25f5-a0f9-48b5-9b15-c25bc462a65e)
+![image](https://github.com/user-attachments/assets/4f83aa9a-fcc7-4d79-a1b9-04519ffafa2a)
 
 ## **트러블 슈팅**
 1. product_img field default None 문제
