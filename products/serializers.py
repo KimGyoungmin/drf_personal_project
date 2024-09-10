@@ -8,13 +8,10 @@ class ProductsSerializers(serializers.ModelSerializer):
         queryset=Category.objects.all(),
         required=False
     )
-    hashtag = serializers.StringRelatedField(many = True)
-
-
     class Meta:
         model = Products
         fields = ['seller', 'title',
-                  'content', 'product_img', 'category','hashtag']
+                  'content', 'product_img', 'category',]
         read_only_fields = ("seller",)
 
     def validate_category(self, value):
@@ -27,3 +24,11 @@ class ProductsSerializers(serializers.ModelSerializer):
             attrs['product_img'] = "products_imgs/default_product.png"
         return attrs
     
+class ProductsListSerializers(ProductsSerializers):
+    hashtag = serializers.StringRelatedField(many = True)
+    
+    class Meta:
+        model = Products
+        fields = ['seller', 'title',
+                  'content', 'product_img', 'category','hashtag']
+        read_only_fields = ("seller",)

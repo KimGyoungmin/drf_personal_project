@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from .serializers import ProductsSerializers
+from .serializers import ProductsSerializers, ProductsListSerializers
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Products, HashTag
@@ -50,7 +50,7 @@ class ProductsListView(APIView):
 
         paginator = CustomPageNumberPagination()
         paginated_products = paginator.paginate_queryset(products, request)
-        page_serializers = ProductsSerializers(paginated_products, many=True)
+        page_serializers = ProductsListSerializers(paginated_products, many=True)
         print(page_serializers.data)
         return paginator.get_paginated_response(page_serializers.data)
 
