@@ -10,6 +10,12 @@
 - PIP : [pillow, simple-jwt, Django-extensions, ipython,djagorestframework]
 
 
+## **API ENDPOINT**
+![image](https://github.com/user-attachments/assets/b122e8b9-3d7b-40cf-afdb-8ddd49945f46)
+
+
+
+
 ## **기능 구현**
 - 회원관련기능
     - **회원가입**
