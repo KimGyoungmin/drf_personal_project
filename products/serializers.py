@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Products, Category, HashTag
+from accounts.models import CustomUser
 
 
 class ProductsSerializers(serializers.ModelSerializer):
@@ -26,7 +27,7 @@ class ProductsSerializers(serializers.ModelSerializer):
     
 class ProductsListSerializers(ProductsSerializers):
     hashtag = serializers.StringRelatedField(many = True)
-    
+    seller = serializers.StringRelatedField()
     class Meta:
         model = Products
         fields = ['seller', 'title',
