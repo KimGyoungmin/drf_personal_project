@@ -133,7 +133,8 @@
           **상품목록조회 REQUEST**
           ![image](https://github.com/user-attachments/assets/44a5de4d-79bb-467d-8dc6-7f10b4146f8c)
           **200 OK**
-          ![image](https://github.com/user-attachments/assets/7cbfea73-2efc-48d7-a529-726944d57a8a)
+          ![image](https://github.com/user-attachments/assets/aef98ff3-ab17-438f-a998-52a4e953464b)
+
             
     - **상품 수정**
         - **조건**: 로그인 상태, 수정 권한 있는 사용자(게시글 작성자)만 가능.
