@@ -66,7 +66,7 @@ class UserRegisterationView(APIView):
             except Exception as e:
                 return Response({"message": f"계정 삭제 중 오류가 발생했습니다.: {str(e)}"})
         else:
-            return Response({"message": "비밀번호가 일치하지 않습니다."})
+            return Response({"message": "비밀번호가 일치하지 않습니다."}, status = status.HTTP_401_UNAUTHORIZED)
 
 # - **조건**: 로그인 상태 필요.
 # - **구현**: 토큰 무효화 또는 다른 방법으로 로그아웃 처리 가능.

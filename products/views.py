@@ -7,6 +7,7 @@ from rest_framework import status
 from .models import Products, HashTag
 from .pagination import CustomPageNumberPagination
 from django.db.models import Q
+from django.core import serializers
 
 
 # 상품 등록과 조회 기능
@@ -46,11 +47,12 @@ class ProductsListView(APIView):
                 Q(content__icontains=query)
             )
         products = products.order_by('-pk')
+
         paginator = CustomPageNumberPagination()
         paginated_products = paginator.paginate_queryset(products, request)
-
-        serializers = ProductsSerializers(paginated_products, many=True)
-        return paginator.get_paginated_response(serializers.data)
+        page_serializers = ProductsSerializers(paginated_products, many=True)
+        print(page_serializers.data)
+        return paginator.get_paginated_response(page_serializers.data)
 
 # 상품 수정과 삭제 기능
 
@@ -72,7 +74,13 @@ class ProductsDetailView(APIView):
                 product, data=request.data, partial=True)
 
             if serializer.is_valid(raise_exception=True):
-                serializer.save()
+                product = serializer.save()
+                product.hashtag.clear()
+                hashtags = request.data.get('hashtag')
+                hashtags = [hashtag.strip() for hashtag in hashtags.split(',')]
+                for hashtag in hashtags:
+                    hashtag, created = HashTag.objects.get_or_create(tags=hashtag)
+                    product.hashtag.add(hashtag.pk)
                 return Response(serializer.data)
         else:
             return Response({"message": "유저와 상품판매자가 일치하지않음"}, status=status.HTTP_403_FORBIDDEN)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Products, Category
+from .models import Products, Category, HashTag
 
 
 class ProductsSerializers(serializers.ModelSerializer):
@@ -8,12 +8,13 @@ class ProductsSerializers(serializers.ModelSerializer):
         queryset=Category.objects.all(),
         required=False
     )
+    hashtag = serializers.StringRelatedField(many = True)
 
 
     class Meta:
         model = Products
         fields = ['seller', 'title',
-                  'content', 'product_img', 'category',]
+                  'content', 'product_img', 'category','hashtag']
         read_only_fields = ("seller",)
 
     def validate_category(self, value):
@@ -25,3 +26,4 @@ class ProductsSerializers(serializers.ModelSerializer):
         if attrs['product_img'] is None:
             attrs['product_img'] = "products_imgs/default_product.png"
         return attrs
+    

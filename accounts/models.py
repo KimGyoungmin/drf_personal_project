@@ -8,9 +8,7 @@ class CustomUser(AbstractUser):
     nickname = models.CharField(
         max_length=50, unique=True, null=True, blank=True)  # 닉네임
     birthday = models.DateField(null=True, blank=True)  # 생일
-    gender = models.CharField(max_length=10, choices=[(
-        # 성별 (생략가능)
-        'M', '남성'), ('F', '여성'), ('O', '기타')], blank=True, null=True)
+    gender = models.CharField(max_length=10, choices=[('M', '남성'), ('F', '여성'), ('O', '기타')], blank=True, null=True)
     bio = models.TextField(blank=True, null=True)  # 자기소개 (생략가능)
     email = models.EmailField(unique=True)  # 이메일 (유일)
 
